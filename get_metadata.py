@@ -39,7 +39,7 @@ for go in range(i):
     id_batch = ids[start:end]
     start += 100
     end += 100
-    tweets = api.statuses_lookup(id_batch)
+    tweets = api.statuses_lookup(id_batch, tweet_mode='extended')
     for tweet in tweets:
         all_data.append(dict(tweet._json))
 
@@ -69,7 +69,7 @@ with open(output_file) as json_data:
     for entry in data:
         t = {
             "created_at": entry["created_at"],
-            "text": entry["text"],
+            "text": entry["full_text"],
             "in_reply_to_screen_name": entry["in_reply_to_screen_name"],
             "retweet_count": entry["retweet_count"],
             "favorite_count": entry["favorite_count"],
